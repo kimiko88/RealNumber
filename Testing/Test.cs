@@ -40,6 +40,27 @@ namespace Testing
         }
 
         [Test]
+        public void Should_String_Right2()
+        {
+            var num1 = new RealNumber("0.010");
+            Assert.AreEqual(num1.ToString(), "0.010");
+        }
+
+        [Test]
+        public void Should_String_Right3()
+        {
+            var num1 = new RealNumber("0.010101");
+            Assert.AreEqual(num1.ToString(), "0.010101");
+        }
+
+        [Test]
+        public void Should_String_Right4()
+        {
+            var num1 = new RealNumber("0.0000101013");
+            Assert.AreEqual(num1.ToString(), "0.0000101013");
+        }
+
+        [Test]
         [ExpectedException(typeof (InvalidOperationException))]
         public void Should_Should_Throw_Exception_When_Number_Is_Written_Wrong()
         {
@@ -178,6 +199,91 @@ namespace Testing
             var num1 = new RealNumber("9999");
             var num2 = new RealNumber("0.00111111");
             Assert.AreEqual((num1 - num2).ToString(), "9998.99888889");
+        }
+
+        [Test]
+        public void Should_Subtract_Right_Real_Case7()
+        {
+            var num1 = new RealNumber("0.01");
+            var num2 = new RealNumber("0.00111111");
+            Assert.AreEqual((num1 - num2).ToString(), "0.00888889");
+        }
+
+
+        [Test]
+        public void Should_Multiply_Right_BigInteger_Case()
+        {
+            var num1 = new RealNumber("1");
+            var num2 = new RealNumber("99999");
+            Assert.AreEqual((num1 * num2).ToString(), "99999");
+        }
+
+
+        [Test]
+        public void Should_Multiply_Right_Real_Case()
+        {
+            var num1 = new RealNumber("1.10");
+            var num2 = new RealNumber("99999");
+            var pp = (num1*num2).ToString();
+            Assert.AreEqual((num1 * num2).ToString(), "109998.9");
+        }
+
+        [Test]
+        public void Should_Multiply_Right_Real_Case1()
+        {
+            var num1 = new RealNumber("10.110");
+            var num2 = new RealNumber("99990");
+            Assert.AreEqual((num1 - num2).ToString(), "-99979.890");
+        }
+
+
+        [Test]
+        public void Should_Multiplyt_Right_Real_Case2()
+        {
+            var num1 = new RealNumber("1111.11111");
+            var num2 = new RealNumber("9999.999999");
+            Assert.AreEqual((num1 - num2).ToString(), "-8888.888889");
+        }
+
+        [Test]
+        public void Should_Multiply_Right_Real_Case3()
+        {
+            var num1 = new RealNumber("0.11111");
+            var num2 = new RealNumber("9999.999999");
+            Assert.AreEqual((num1 - num2).ToString(), "-9999.888889");
+        }
+
+        [Test]
+        public void Should_Multiply_Right_Real_Case4()
+        {
+            var num1 = new RealNumber("0.00111111");
+            var num2 = new RealNumber("9999.999999");
+            Assert.AreEqual((num1 - num2).ToString(), "-9999.99888789");
+        }
+
+
+        [Test]
+        public void Should_Multiply_Right_Real_Case5()
+        {
+            var num1 = new RealNumber("0.00111111");
+            var num2 = new RealNumber("9999");
+            Assert.AreEqual((num1 - num2).ToString(), "-9998.99888889");
+        }
+
+        [Test]
+        public void Should_Multiply_Right_Real_Case6()
+        {
+            var num1 = new RealNumber("9999");
+            var num2 = new RealNumber("0.00111111");
+            Assert.AreEqual((num1 - num2).ToString(), "9998.99888889");
+        }
+
+        [Test]
+        public void Should_Multiply_Right_Real_Case7()
+        {
+            var num1 = new RealNumber("0.01");
+            var num2 = new RealNumber("0.00111111");
+            Assert.AreEqual((num1 - num2).ToString(), "0.00888889");
         }
     }
 }

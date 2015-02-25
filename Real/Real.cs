@@ -50,9 +50,14 @@ namespace Real
         public override string ToString()
         {
             var num = Number.ToString();
-            if (Exponent > 0)
+            if (Exponent > 0 && Exponent < num.Length)
             {
                 return num.Substring(0, num.Length - Exponent) + '.' + num.Substring(num.Length - Exponent);
+            }
+            else if(Exponent >= num.Length)
+            {
+                var diff = Exponent - num.Length;
+                return "0." + new string('0', diff) + num.Substring(0, num.Length);
             }
             return num;
         }
@@ -125,6 +130,29 @@ namespace Real
                 }
 
                 return new RealNumber(a.Number - b.Number, Max(a.Exponent, b.Exponent));
+            }
+            return new RealNumber();
+        }
+
+
+        public static RealNumber operator *(RealNumber a, RealNumber b)
+        {
+            if (a.Exponent <= 0 && b.Exponent <= 0)
+            {
+                return new RealNumber(a.Number * b.Number);
+            }
+            else
+            {
+                if (a.Exponent < b.Exponent)
+                {
+                    a = BalanceNumber(a, b.Exponent);
+                }
+                else if (b.Exponent < a.Exponent)
+                {
+                    b = BalanceNumber(b, a.Exponent);
+                }
+
+                return new RealNumber(a.Number * b.Number, a.Exponent+ b.Exponent);
             }
             return new RealNumber();
         }
