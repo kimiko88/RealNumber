@@ -225,7 +225,7 @@ namespace Testing
             var num1 = new RealNumber("1.10");
             var num2 = new RealNumber("99999");
             var pp = (num1*num2).ToString();
-            Assert.AreEqual((num1 * num2).ToString(), "109998.9");
+            Assert.AreEqual((num1 * num2).ToString(), "109998.9000");
         }
 
         [Test]
@@ -233,7 +233,7 @@ namespace Testing
         {
             var num1 = new RealNumber("10.110");
             var num2 = new RealNumber("99990");
-            Assert.AreEqual((num1 - num2).ToString(), "-99979.890");
+            Assert.AreEqual((num1 * num2).ToString(), "1010898.900000");
         }
 
 

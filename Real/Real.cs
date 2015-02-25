@@ -152,7 +152,7 @@ namespace Real
                     b = BalanceNumber(b, a.Exponent);
                 }
 
-                return new RealNumber(a.Number * b.Number, a.Exponent+ b.Exponent);
+                return new RealNumber(a.Number * b.Number, 2*Max(a.Exponent, b.Exponent));
             }
             return new RealNumber();
         }
