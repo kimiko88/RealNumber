@@ -232,7 +232,7 @@ namespace Testing
         public void Should_Multiply_Right_Real_Case1()
         {
             var num1 = new RealNumber("10.110");
-            var num2 = new RealNumber("99990");
+            var num2 = new  RealNumber("99990");
             Assert.AreEqual((num1 * num2).ToString(), "1010898.900000");
         }
 
