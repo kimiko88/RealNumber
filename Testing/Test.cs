@@ -224,7 +224,6 @@ namespace Testing
         {
             var num1 = new RealNumber("1.10");
             var num2 = new RealNumber("99999");
-            var pp = (num1*num2).ToString();
             Assert.AreEqual((num1 * num2).ToString(), "109998.9000");
         }
 
@@ -292,7 +291,7 @@ namespace Testing
         {
             var num1 = new RealNumber("1");
             var num2 = new RealNumber("99999");
-            Assert.AreEqual((num1 / num2).ToString(), "1,0000100001000010000100001");
+            Assert.AreEqual((num1 / num2).ToString(), "0.0000100001000010000");
         }
 
 
@@ -301,8 +300,8 @@ namespace Testing
         {
             var num1 = new RealNumber("1.10");
             var num2 = new RealNumber("99999");
-            var pp = (num1 * num2).ToString();
-            Assert.AreEqual((num1 * num2).ToString(), "109998.9000");
+            var pp = (num1/num2).ToString();
+            Assert.AreEqual((num1 / num2).ToString(), "0.000011000110001");
         }
 
         [Test]
@@ -310,7 +309,7 @@ namespace Testing
         {
             var num1 = new RealNumber("10.110");
             var num2 = new RealNumber("99990");
-            Assert.AreEqual((num1 * num2).ToString(), "1010898.900000");
+            Assert.AreEqual((num1 / num2).ToString(), "0.000101110111011");
         }
 
 
@@ -319,7 +318,7 @@ namespace Testing
         {
             var num1 = new RealNumber("1111.11111");
             var num2 = new RealNumber("9999.999999");
-            Assert.AreEqual((num1 * num2).ToString(), "11111111.098888888890");
+            Assert.AreEqual((num1 / num2).ToString(), "0.111111111011111");
         }
 
         [Test]
@@ -327,7 +326,7 @@ namespace Testing
         {
             var num1 = new RealNumber("0.11111");
             var num2 = new RealNumber("9999.999999");
-            Assert.AreEqual((num1 * num2).ToString(), "1111.099999888890");
+            Assert.AreEqual((num1 / num2).ToString(), "0.000011111000001");
         }
 
         [Test]
@@ -335,7 +334,7 @@ namespace Testing
         {
             var num1 = new RealNumber("0.00111111");
             var num2 = new RealNumber("9999.999999");
-            Assert.AreEqual((num1 * num2).ToString(), "11.1110999988888900");
+            Assert.AreEqual((num1 / num2).ToString(), "0.0000001111110000");
         }
 
 
@@ -344,7 +343,7 @@ namespace Testing
         {
             var num1 = new RealNumber("0.00111111");
             var num2 = new RealNumber("9999");
-            Assert.AreEqual((num1 * num2).ToString(), "11.1099888900000000");
+            Assert.AreEqual((num1 / num2).ToString(), "0.000000111122112");
         }
 
         [Test]
@@ -352,7 +351,7 @@ namespace Testing
         {
             var num1 = new RealNumber("9999");
             var num2 = new RealNumber("0.00111111");
-            Assert.AreEqual((num1 * num2).ToString(), "11.1099888900000000");
+            Assert.AreEqual((num1 / num2).ToString(), "8999108.999108999108999");
         }
 
         [Test]
@@ -360,7 +359,7 @@ namespace Testing
         {
             var num1 = new RealNumber("0.01");
             var num2 = new RealNumber("0.00111111");
-            Assert.AreEqual((num1 * num2).ToString(), "0.0000111111000000");
+            Assert.AreEqual((num1 / num2).ToString(), "9.00000900000900000");
         }
     }
 }
