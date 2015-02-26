@@ -21,7 +21,7 @@ or
 var number =  new RealNumber(3);
 </code>
 
-#operator
+#Operator
 Now the supported operator are:
 
 <code>
@@ -31,7 +31,7 @@ Now the supported operator are:
 ^ only with integer exponent and real base.
 
 
-#method
+#Method
 
 There are some methods for adjust division precision (<code>Division(RealNumber a, RealNumber b, int prec);PeriodicDivision(RealNumber a, RealNumber b, int prec)</code> to avoid the repeating sequence of numbers in the result.
 
