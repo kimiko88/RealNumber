@@ -210,6 +210,30 @@ namespace Testing
             var num2 = new RealNumber("0.00111111");
             Assert.AreEqual((num1 - num2).ToString(), "0.00888889");
         }
+
+        [Test]
+        public void Should_Subtract_Right_Real_Case8()
+        {
+            var num1 = new RealNumber("1");
+            var num2 = new RealNumber("1");
+            Assert.AreEqual((num1 - num2).ToString(), "0");
+        }
+
+        [Test]
+        public void Should_Subtract_Right_Real_Case9()
+        {
+            var num1 = new RealNumber("0.01");
+            var num2 = new RealNumber("0.01");
+            Assert.AreEqual((num1 - num2).ToString(), "0.00");
+        }
+
+        [Test]
+        public void Should_Subtract_Right_Real_Case10()
+        {
+            var num1 = new RealNumber("10.01");
+            var num2 = new RealNumber("10.02");
+            Assert.AreEqual((num1 - num2).ToString(), "-0.01");
+        }
         #endregion
 
         #region multiplication test
@@ -282,6 +306,14 @@ namespace Testing
         {
             var num1 = new RealNumber("0.01");
             var num2 = new RealNumber("0.00111111");
+            Assert.AreEqual((num1 * num2).ToString(), "0.0000111111000000");
+        }
+
+        [Test]
+        public void Should_Multiply_Right_Real_Case8()
+        {
+            var num1 = new RealNumber("-0.01");
+            var num2 = new RealNumber("-0.00111111");
             Assert.AreEqual((num1 * num2).ToString(), "0.0000111111000000");
         }
         #endregion
@@ -358,6 +390,15 @@ namespace Testing
             var num1 = new RealNumber("0.01");
             var num2 = new RealNumber("0.00111111");
             Assert.AreEqual((num1 / num2).ToString(), "9.00000900000900000");
+        }
+
+        [Test]
+        public void Should_Divide_Right_Real_Case8()
+        {
+            var num1 = new RealNumber("0.01");
+            var num2 = new RealNumber("10");
+            var pp = (num1/num2).ToString();
+            Assert.AreEqual((num1 / num2).ToString(), "0.001");
         }
 
         [Test]
@@ -538,6 +579,172 @@ namespace Testing
             var denom = new RealNumber("0");
             RealNumber.PeriodicDivision(num, denom, 50).ToString();
         }
+        #endregion
+
+        #region power test
+        [Test]
+        public void Should_Power_Right_BigInteger_Case()
+        {
+            var num1 = new RealNumber("1");
+            var num2 = new RealNumber("99999");
+            Assert.AreEqual((num1 ^ num2).ToString(), "1");
+        }
+
+        [Test]
+        public void Should_Power_Right_BigInteger_Case1()
+        {
+            var num1 = new RealNumber("3");
+            var num2 = new RealNumber("3");
+            Assert.AreEqual((num1 ^ num2).ToString(), "27");
+        }
+
+        [Test]
+        public void Should_Power_Right_Real_Case()
+        {
+            var num1 = new RealNumber("1.10");
+            var num2 = new RealNumber("99");
+            Assert.IsTrue((num1 ^ num2).ToString().Contains("12527.8293998384274401075792473542152511493920000349694846786"));
+        }
+
+        [Test]
+        public void Should_Power_Right_Real_Case1()
+        {
+            var num1 = new RealNumber("10.110");
+            var num2 = new RealNumber("10");
+            Assert.IsTrue((num1 ^ num2).ToString().Contains("11156078"));
+        }
+
+        [Test]
+        public void Should_Power_Right_Real_Case2()
+        {
+            var num1 = new RealNumber("1111.11111");
+            var num2 = new RealNumber("3");
+            Assert.IsTrue((num1 ^ num2).ToString().Contains("1371742108.3"));
+        }
+
+        //[Test]
+        //public void Should_Power_Right_Real_Case3()
+        //{
+        //    var num1 = new RealNumber("0.11111");
+        //    var num2 = new RealNumber("9999.999999");
+        //    Assert.AreEqual((num1 * num2).ToString(), "1111.099999888890");
+        //}
+
+        //[Test]
+        //public void Should_Power_Right_Real_Case4()
+        //{
+        //    var num1 = new RealNumber("0.00111111");
+        //    var num2 = new RealNumber("9999.999999");
+        //    Assert.AreEqual((num1 * num2).ToString(), "11.1110999988888900");
+        //}
+
+        //[Test]
+        //public void Should_Power_Right_Real_Case5()
+        //{
+        //    var num1 = new RealNumber("0.00111111");
+        //    var num2 = new RealNumber("9999");
+        //    Assert.AreEqual((num1 * num2).ToString(), "11.1099888900000000");
+        //}
+
+        //[Test]
+        //public void Should_Power_Right_Real_Case6()
+        //{
+        //    var num1 = new RealNumber("9999");
+        //    var num2 = new RealNumber("0.00111111");
+        //    Assert.AreEqual((num1 * num2).ToString(), "11.1099888900000000");
+        //}
+
+        //[Test]
+        //public void Should_Power_Right_Real_Case7()
+        //{
+        //    var num1 = new RealNumber("0.01");
+        //    var num2 = new RealNumber("0.00111111");
+        //    Assert.AreEqual((num1 * num2).ToString(), "0.0000111111000000");
+        //}
+        #endregion
+
+        #region minus major test
+        [Test]
+        public void Should_Minor_Right()
+        {
+            var num1 = new RealNumber("1.10");
+            var num2 = new RealNumber("1.11");
+            Assert.IsTrue(num1 < num2);
+            Assert.IsFalse(num2 < num2);
+        }
+
+        [Test]
+        public void Should_Major_Right()
+        {
+            var num1 = new RealNumber("1.10");
+            var num2 = new RealNumber("1.11");
+            Assert.IsTrue(num2 > num1);
+            Assert.IsFalse(num2 > num2);
+        }
+
+        [Test]
+        public void Should_MajorOrEqual_Right()
+        {
+            var num1 = new RealNumber("1.10");
+            var num2 = new RealNumber("1.11");
+            Assert.IsTrue(num2 >= num1);
+            Assert.IsTrue(num2 >= num2);
+        }
+
+        [Test]
+        public void Should_MinorOrEqual_Right()
+        {
+            var num1 = new RealNumber("1.10");
+            var num2 = new RealNumber("1.11");
+            Assert.IsTrue(num1 <= num2);
+            Assert.IsTrue(num2 <= num2);
+        }
+        #endregion
+
+        #region root test
+        [Test]
+        public void Should_Root_Right_BigInteger_Case()
+        {
+            var num1 = new RealNumber("4");
+            var num2 = new RealNumber("2");
+            var maxError = new RealNumber("0.00001");
+            Assert.IsTrue((RealNumber.nRoot(num1, num2, maxError)).ToString().Contains("2.00"));
+        }
+
+        [Test]
+        public void Should_Root_Right_BigInteger_Case1()
+        {
+            var num1 = new RealNumber("3");
+            var num2 = new RealNumber("3");
+            var maxError = new RealNumber("0.0001");
+            Assert.IsTrue((RealNumber.nRoot(num1, num2, maxError)).ToString().Contains("1.4422495703"));
+        }
+
+        [Test]
+        public void Should_Root_Right_Real_Case()
+        {
+            var num1 = new RealNumber("1.10");
+            var num2 = new RealNumber("10");
+            var maxError = new RealNumber("0.0001");
+            Assert.IsTrue((RealNumber.nRoot(num1, num2, maxError)).ToString().Contains("1.0095765827")); ;
+        }
+
+        //[Test]
+        //public void Should_Root_Right_Real_Case1()
+        //{
+        //    var num1 = new RealNumber("10.110");
+        //    var num2 = new RealNumber("10");
+        //    Assert.IsTrue((num1 ^ num2).ToString().Contains("11156078"));
+        //}
+
+        //[Test]
+        //public void Should_Root_Right_Real_Case2()
+        //{
+        //    var num1 = new RealNumber("1111.11111");
+        //    var num2 = new RealNumber("3");
+        //    Assert.IsTrue((num1 ^ num2).ToString().Contains("1371742108.3"));
+        //}
+
         #endregion
     }
 }

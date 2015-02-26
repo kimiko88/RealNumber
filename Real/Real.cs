@@ -54,14 +54,19 @@ namespace Real
         public override string ToString()
         {
             var num = Number.ToString();
+            var sign = num.Contains('-') ? 1 : 0;
             if (Exponent > 0 && Exponent < num.Length)
             {
                 return num.Substring(0, num.Length - Exponent) + '.' + num.Substring(num.Length - Exponent);
             }
             else if (Exponent >= num.Length)
             {
-                var diff = Exponent - num.Length;
-                return "0." + new string('0', diff) + num.Substring(0, num.Length);
+                var diff = Exponent - (num.Length-sign);
+                if (sign == 0)
+                {
+                    return "0." + new string('0', diff) + num.Substring(0, num.Length);
+                }
+                return "-0." + new string('0', diff) + num.Substring(1, num.Length-1);
             }
             return num;
         }
@@ -92,13 +97,44 @@ namespace Real
         public int CompareTo(RealNumber other)
         {
             BalanceNumbers(ref other, ref this);
-            return this.Number.CompareTo(other);
+            return this.Number.CompareTo(other.Number);
         }
 
 
         public bool Equals(RealNumber other)
         {
             return other.Number == Number;
+        }
+
+
+        public static bool operator >(RealNumber a, RealNumber b)
+        {
+            return a.CompareTo(b) > 0 ;
+        }
+
+        public static bool operator <(RealNumber a, RealNumber b)
+        {
+            return a.CompareTo(b) < 0;
+        }
+
+        public static bool operator <=(RealNumber a, RealNumber b)
+        {
+            return a.CompareTo(b) <= 0;
+        }
+
+        public static bool operator >=(RealNumber a, RealNumber b)
+        {
+            return a.CompareTo(b) >= 0;
+        }
+
+        public static bool operator ==(RealNumber a, RealNumber b)
+        {
+            return a.CompareTo(b) == 0;
+        }
+
+        public static bool operator !=(RealNumber a, RealNumber b)
+        {
+            return a.CompareTo(b) != 0;
         }
 
 
@@ -149,6 +185,43 @@ namespace Real
             return new RealNumber(SetCommaDiv(Divide(a, b), 0));
         }
 
+        public static RealNumber operator ^(RealNumber a, int b)
+        {
+            if (a.Exponent <= 0)
+            {
+                return new RealNumber(BigInteger.Pow(a.Number, b));
+            }
+            var num = a;
+            for (int i = 1; i < b; i++)
+            {
+                a = a*num;
+            }
+            return a;
+        }
+
+        public static RealNumber operator ^(RealNumber a, BigInteger b)
+        {
+            return a ^ new RealNumber(b);
+        }
+
+        public static RealNumber operator ^(RealNumber a, RealNumber b)
+        {
+            var num = a;
+            if (b.Exponent <1)
+            {
+                for (var i = 1; i < b.Number; i++)
+                {
+                    a = a*num;
+                    if (a.ToString().Contains("."))
+                    {
+                        a = new RealNumber(a.ToString().TrimEnd('0').TrimEnd('.'));
+                    }
+                }
+                return a;
+            }
+            throw new NotImplementedException();
+        }
+
 
         public static RealNumber Division(RealNumber a, RealNumber b, int prec)
         {
@@ -164,6 +237,7 @@ namespace Real
             return new RealNumber(SetCommaDiv(Divide(a, b, prec), 0));
         }
 
+
         public static RealNumber PeriodicDivision(RealNumber a, RealNumber b, int prec)
         {
             if (b.Number.IsZero)
@@ -176,6 +250,32 @@ namespace Real
             }
             BalanceNumbers(ref a, ref b);
             return new RealNumber(SetCommaDiv(DividePeriodic(a, b, prec), 0));
+        }
+
+
+        public static RealNumber nRoot(RealNumber num, RealNumber root, RealNumber maxError,int prec = 15)
+        {
+            var one = new RealNumber("1");
+            var error = new RealNumber("1");
+            var start = new RealNumber("1");
+            if (root.Exponent < 1)
+            {
+                do
+                {
+                    var o1 = Division(one, root, prec);
+                    var o2 = (Division(num, start ^ (root - one), prec) - start).ToString();
+                    var o3 = start;
+                    error = Division(one, root, prec)*(Division(num, start ^ (root - one), prec) - start);
+                    start = start + error;
+                } while (Abs(error) > maxError);
+                return start;
+            }
+            throw new NotImplementedException();
+        }
+
+        public static RealNumber Abs(RealNumber num)
+        {
+            return num.Number.Sign == -1 ? num*new RealNumber(-1) : num;
         }
 
         private static string Divide(RealNumber a, RealNumber b, int precision = 15)
