@@ -157,6 +157,36 @@ namespace Real
             return new RealNumber();
         }
 
+
+        public static RealNumber operator /(RealNumber a, RealNumber b)
+        {
+            if (a.Exponent <= 0 && b.Exponent <= 0)
+            {
+                return new RealNumber(a.Number / b.Number);
+            }
+            else
+            {
+                if (a.Exponent < b.Exponent)
+                {
+                    a = BalanceNumber(a, b.Exponent);
+                }
+                else if (b.Exponent < a.Exponent)
+                {
+                    b = BalanceNumber(b, a.Exponent);
+                }
+
+                return new RealNumber(a.Number / b.Number, a.Exponent - b.Exponent);
+            }
+            return new RealNumber();
+        }
+
+        //private static string Divide(RealNumber a, RealNumber b,int precision = 15)
+        //{
+        //    BigInteger rest;
+        //    var result = BigInteger.DivRem(a.Number, b.Number, out rest);
+
+        //}
+
         private static  int Max(int expo1,int expo2)
         {
             return expo1 < expo2 ? expo2 : expo1;
