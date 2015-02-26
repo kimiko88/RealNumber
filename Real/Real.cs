@@ -43,6 +43,13 @@ namespace Real
         }
 
 
+        public RealNumber(int number)
+            : this()
+        {
+            this.Number = number;
+            this.Exponent = 0;
+        }
+
         public RealNumber(BigInteger number, int expo)
             : this()
         {
