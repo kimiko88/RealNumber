@@ -269,9 +269,6 @@ namespace Real
             {
                 do
                 {
-                    var o1 = Division(one, root, prec);
-                    var o2 = (Division(num, start ^ (root - one), prec) - start).ToString();
-                    var o3 = start;
                     error = Division(one, root, prec)*(Division(num, start ^ (root - one), prec) - start);
                     start = start + error;
                 } while (Abs(error) > maxError);
